@@ -1,0 +1,7 @@
+{
+  "name": "docskills",
+  "description": "Portable ADR and documentation kit. Skills live under .agents/skills.",
+  "version": "1.0.0",
+  "keywords": ["adr", "documentation", "skills"],
+  "skills": ".agents/skills"
+}

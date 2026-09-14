@@ -1,0 +1,16 @@
+---
+description: Portable ADR and documentation kit (adr-orchestrator, doc-keeper). Always apply.
+alwaysApply: true
+---
+
+# docskills
+
+Read and follow `AGENTS.md` at the repo root. Canonical skills: `.agents/skills/adr-orchestrator` and `.agents/skills/doc-keeper`.
+
+- Before opening ADRs: read `docs/adr/000-index.md`.
+- Live product: `docs/current/`. Do not rewrite `docs/adr/done/`.
+- Do not read `docs/archive/` unless explicitly asked.
+- North Star: do not block refactors for backwards compatibility; prefer a clean cut.
+- Invoke `adr-orchestrator` for intake, portfolio, phases, validation, handoff, or closeout.
+- Invoke `doc-keeper` on every closeout and before `git commit`.
+- No commit or push without explicit user authorization.

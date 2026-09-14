@@ -1,0 +1,14 @@
+{
+  "name": "docskills",
+  "description": "Portable ADR and documentation kit for AI agents.",
+  "plugins": [
+    {
+      "name": "docskills",
+      "description": "ADR orchestrator and doc-keeper. Canonical path: .agents/skills.",
+      "source": "./",
+      "category": "productivity",
+      "tags": ["adr", "documentation", "skills"],
+      "skills": ".agents/skills"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "docskills",
+  "version": "1.0.0",
+  "description": "Portable ADR and documentation kit for AI agents. Bilingual English/Spanish installer.",
+  "license": "UNLICENSED",
+  "bin": {
+    "docskills": "./bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "scripts/",
+    "locales/",
+    ".agents/skills/",
+    ".claude-plugin/",
+    ".codex-plugin/",
+    ".github/plugin/",
+    "README.md",
+    "README.es.md"
+  ],
+  "scripts": {
+    "test": "node --test tests/install.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "adr",
+    "documentation",
+    "agents",
+    "cursor",
+    "claude-code",
+    "copilot",
+    "antigravity",
+    "skills"
+  ]
+}

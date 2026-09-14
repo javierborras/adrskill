@@ -1,0 +1,13 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "docskills",
+  "description": "Portable ADR and documentation kit for AI agents.",
+  "plugins": [
+    {
+      "name": "docskills",
+      "description": "ADR orchestrator and doc-keeper skills. Canonical path: .agents/skills.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}
