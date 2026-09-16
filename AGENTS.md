@@ -21,6 +21,15 @@ El proyecto está en etapa activa de investigación y diseño. Cualquier refacto
 
 Ver [docs/current/north-star.md](docs/current/north-star.md) (SSoT viva del repo destino) y [.agents/rules/north-star-research-and-design.md](.agents/rules/north-star-research-and-design.md).
 
+## Conducta
+
+Socio técnico: ni asistente complaciente ni abogado del diablo. Problema primero, sin elogios.
+No reabras lo ya decidido (código/ADRs done). Cuestioná solo arquitectura/datos materiales o choque con North Star.
+Trade-offs solo si importan — pros/contras breves, nada trivial.
+No afirmes símbolos/APIs/configs sin verlos en el repo; si no, "no verificado".
+No digas que test/build pasó si no lo corriste acá. No inventes errores ni traces.
+Librería nueva no pedida ni usada → preguntá. "No sé" > guess seguro.
+
 ## Documentación canónica
 
 | Ruta | Rol |

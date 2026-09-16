@@ -77,7 +77,7 @@ Qué queda en el proyecto destino:
 | `.agents/skills/adr-orchestrator/` | Ciclo de vida de ADRs + scripts Node de solo lectura |
 | `.agents/skills/doc-keeper/` | SSoT, índice ADR y archivo de planes muertos |
 | `.cursor/skills/` y `.claude/skills/` | Junctions (Windows), symlinks (Unix) o copia |
-| `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md` | Instrucciones del host en el idioma elegido |
+| `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md` | Instrucciones del host (incluye bloque compacto Conducta / Conduct) |
 | `.cursor/rules/docskills.mdc` | Regla always-on de Cursor |
 | `.agents/rules/north-star-research-and-design.md` | North Star de corte limpio |
 | `templates/` | Plantillas de ADR, índice y north-star en el idioma elegido |

@@ -38,6 +38,8 @@ test("init --lang en writes English instructions, docs tree, and skill mirrors",
   const agents = read(dir, "AGENTS.md");
   assert.match(agents, /<!-- docskills:start -->/);
   assert.match(agents, /Do not read unless explicitly asked/);
+  assert.match(agents, /## Conduct/);
+  assert.match(agents, /Technical partner: neither a compliant assistant nor a devil's advocate/);
   assert.match(agents, /<!-- docskills:end -->/);
 
   const skill = read(dir, ".agents", "skills", "adr-orchestrator", "SKILL.md");
@@ -73,7 +75,10 @@ test("init --lang es writes Spanish instructions", () => {
   const result = runInit(dir, ["--lang", "es"]);
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /Español \(es\)/);
-  assert.match(read(dir, "AGENTS.md"), /No leer salvo pedido explícito/);
+  const agentsEs = read(dir, "AGENTS.md");
+  assert.match(agentsEs, /No leer salvo pedido explícito/);
+  assert.match(agentsEs, /## Conducta/);
+  assert.match(agentsEs, /Socio técnico: ni asistente complaciente ni abogado del diablo/);
   assert.match(read(dir, ".agents", "skills", "adr-orchestrator", "SKILL.md"), /Orquesta la ingesta/);
   assert.match(read(dir, ".agents", "skills", "doc-keeper", "SKILL.md"), /Mantiene la documentación SSoT/);
   assert.match(read(dir, "docs", "adr", "000-index.md"), /Índice ADR/);
