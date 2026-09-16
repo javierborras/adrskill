@@ -5,11 +5,12 @@ Copy the active-mode block and tick it in the session.
 ## Intake
 
 ```
+- [ ] (Optional) create-adr --title … scaffold NNN-slug.md + index
 - [ ] Evidence / assumptions / decisions / no-goals / questions, separated
 - [ ] inspect-adrs.js run; next ID free
 - [ ] Duplicates, overlaps, and dependencies reviewed
 - [ ] Explicit user approval
-- [ ] NNN-slug.md created (proposed/ or in-progress/)
+- [ ] NNN-slug.md created (proposed/ or in-progress/); never done/; no -pendings-
 - [ ] 000-index.md updated
 ```
 
@@ -54,6 +55,7 @@ Copy the active-mode block and tick it in the session.
 - [ ] Tests green
 - [ ] Leftovers classified (resolved / deferred / rejected / open+owner)
 - [ ] doc-keeper invoked
+- [ ] docs/current/north-star.md exists (infer-northstar with gate, or by hand)
 - [ ] Moved to done/; Status Done/Implemented/Hecho
 - [ ] 000-index.md and docs/current/ updated
 - [ ] Loose plans in docs/archive/

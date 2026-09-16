@@ -24,7 +24,7 @@ Turn **approved** architecture decisions into a live ADR and execute them safely
 - Names: `NNN-slug.md` (three or more digits). One file per piece of work; no `-pendings-…` companions.
 - Invoke `doc-keeper` on closeout and before a commit.
 - Helper scripts are **read-only**: they do not move files, rewrite ADRs, commit, or push.
-- **North Star:** research and design stage. Backwards compatibility with old schemas, files, or contracts is **never** a blocker. Prefer a clean cut (see `docs/current/north-star.md` and `.agents/rules/north-star-research-and-design.md`).
+- **North Star:** research and design stage. Backwards compatibility with old schemas, files, or contracts is **never** a blocker. Prefer a clean cut (see `docs/current/north-star.md` and `.agents/rules/north-star-research-and-design.md`). If north-star is missing, `docskills infer-northstar` requires a gate (`--goal` / `--doc` / `--paths`) before scanning; default dry-run; `--write` only with approval.
 - If a phase changes contracts consumed by another surface (UI, CLI, satellite API), update that surface **in the same phase**. Do not leave the consumer stale “for later”. If it does not apply, document `surface: N/A (<reason>)` in the handoff.
 
 ## State machine
@@ -86,11 +86,12 @@ Fix mechanical index or file problems first (duplicate IDs, broken links, live A
 
 ### INTAKE
 
+0. **Scaffold (optional):** `node <kit>/bin/cli.js create-adr --title "…" [--slug …] [--status proposed|in-progress|deferred] [--from path]`. Alias `create-ADR`. Creates `docs/adr/<status>/NNN-slug.md`, updates `000-index.md`, prints the path and next step. **Never** writes to `done/`; one file per ADR (no `-pendings-…`). Still ask for explicit user approval before treating the ADR as an execution queue.
 1. Separate observed evidence, assumptions, decisions, no-goals, and open questions.
-2. Run `inspect-adrs.js` before assigning a sequential 3-digit number.
+2. Run `inspect-adrs.js` before assigning a sequential 3-digit number (if you did not use `create-adr`).
 3. Identify duplicates, overlaps, dependencies, and missing owners.
-4. Ask the user for **explicit approval** before writing an ADR file or changing the index.
-5. Create `docs/adr/proposed/NNN-slug.md` (or `in-progress/` if it will execute immediately) and update `docs/adr/000-index.md`.
+4. Ask the user for **explicit approval** before writing an ADR file or changing the index (unless the user already invoked `create-adr` on purpose).
+5. Create `docs/adr/proposed/NNN-slug.md` (or `in-progress/` if it will execute immediately) and update `docs/adr/000-index.md` — or use `create-adr`.
 6. If the ADR will touch contracts visible on another surface, mention it in phases or consequences.
 
 ### PORTFOLIO (queue management)

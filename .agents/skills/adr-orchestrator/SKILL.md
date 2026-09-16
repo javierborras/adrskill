@@ -24,7 +24,7 @@ Convierte decisiones de arquitectura **aprobadas** en un ADR vivo y ejecútalas 
 - Nombres: `NNN-slug.md` (tres o más dígitos). Un archivo por trabajo; no companions `-pendings-…`.
 - Invocar `doc-keeper` en closeout y antes de un commit.
 - Los scripts auxiliares son de **solo lectura**: no mueven archivos, no reescriben ADRs, no hacen commit ni push.
-- **North Star:** etapa de investigación y diseño. La retrocompatibilidad con esquemas, archivos o contratos viejos **nunca** es un blocker. Preferir corte limpio (ver `docs/current/north-star.md` y `.agents/rules/north-star-research-and-design.md`).
+- **North Star:** etapa de investigación y diseño. La retrocompatibilidad con esquemas, archivos o contratos viejos **nunca** es un blocker. Preferir corte limpio (ver `docs/current/north-star.md` y `.agents/rules/north-star-research-and-design.md`). Si falta north-star, `docskills infer-northstar` exige puerta (`--goal` / `--doc` / `--paths`) antes de escanear; default dry-run; `--write` solo con aprobación.
 - Si una fase cambia contratos que consume otra superficie (UI, CLI, API satélite), actualizar esa superficie **en la misma fase**. No dejar el consumidor desfasado “para después”. Si no aplica, documentar `superficie: N/A (<motivo>)` en el handoff.
 
 ## Máquina de estados
@@ -86,11 +86,12 @@ Resolver primero problemas mecánicos del índice o de archivos (IDs duplicados,
 
 ### INTAKE (Ingesta)
 
+0. **Scaffold (opcional):** `node <kit>/bin/cli.js create-adr --title "…" [--slug …] [--status proposed|in-progress|deferred] [--from path]`. Alias `create-ADR`. Crea `docs/adr/<status>/NNN-slug.md`, actualiza `000-index.md`, imprime la ruta y el siguiente paso. **Nunca** escribe en `done/`; un archivo por ADR (sin `-pendings-…`). Sigue pidiendo aprobación explícita del usuario antes de tratar el ADR como cola de ejecución.
 1. Separar evidencia observada, supuestos, decisiones, no-goals y preguntas abiertas.
-2. Ejecutar `inspect-adrs.js` antes de asignar un número secuencial de 3 dígitos.
+2. Ejecutar `inspect-adrs.js` antes de asignar un número secuencial de 3 dígitos (si no usaste `create-adr`).
 3. Identificar duplicaciones, traslapes, dependencias y falta de responsable.
-4. Pedir **aprobación explícita** al usuario antes de escribir un archivo ADR o alterar el índice.
-5. Crear `docs/adr/proposed/NNN-slug.md` (o `in-progress/` si se ejecuta de inmediato) y actualizar `docs/adr/000-index.md`.
+4. Pedir **aprobación explícita** al usuario antes de escribir un archivo ADR o alterar el índice (salvo que el usuario ya haya invocado `create-adr` a propósito).
+5. Crear `docs/adr/proposed/NNN-slug.md` (o `in-progress/` si se ejecuta de inmediato) y actualizar `docs/adr/000-index.md` — o usar `create-adr`.
 6. Si el ADR tocará contratos visibles en otra superficie, mencionarlo en fases o consecuencias.
 
 ### PORTFOLIO (Gestión de cola)

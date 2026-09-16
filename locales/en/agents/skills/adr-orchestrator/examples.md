@@ -4,11 +4,12 @@ Guidance only. They never authorize ADR or Git changes without user confirmation
 
 ## Intake
 
-1. Run `inspect-adrs.js`.
-2. Separate observed evidence from the technical proposal.
-3. Identify dependencies and explicit no-goals.
-4. Present scope and ask for approval.
-5. After approval, create `docs/adr/proposed/023-new-feature.md` and update `docs/adr/000-index.md`.
+1. (Optional) `node <kit>/bin/cli.js create-adr --title "…" --slug …`
+2. Run `inspect-adrs.js`.
+3. Separate observed evidence from the technical proposal.
+4. Identify dependencies and explicit no-goals.
+5. Present scope and ask for approval.
+6. After approval, create `docs/adr/proposed/023-new-feature.md` and update `docs/adr/000-index.md` (or use `create-adr`).
 
 ## Phase execution
 

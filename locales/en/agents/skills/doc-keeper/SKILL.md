@@ -52,7 +52,9 @@ Loose plans (`implementation_plan*.md`, phase notes, dumps) → `docs/archive/` 
 
 ### 5. Confirmation
 
-Summary: docs touched, ADR created/moved, what was archived. OK to commit **only** if the user authorized it.
+Before closeout OK: verify `docs/current/north-star.md` exists. If missing, do not invent silently — ask for goal/doc/paths and run `docskills infer-northstar` (mandatory gate; default dry-run; `--write` only with approval), or author it by hand from `templates/north-star-template.md`.
+
+Summary: docs touched, ADR created/moved, what was archived, north-star present. OK to commit **only** if the user authorized it.
 
 ## Limits
 

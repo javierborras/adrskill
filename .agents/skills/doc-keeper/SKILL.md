@@ -52,7 +52,9 @@ Planes sueltos (`implementation_plan*.md`, notas de fase, dumps) → `docs/archi
 
 ### 5. Confirmación
 
-Resumen: docs tocados, ADR creado/movido, qué se archivó. OK para commit **solo** si el usuario lo autorizó.
+Antes de dar OK de closeout: verificar que exista `docs/current/north-star.md`. Si falta, no inventar en silencio — pedir goal/doc/paths y correr `docskills infer-northstar` (puerta obligatoria; default dry-run; `--write` solo con aprobación), o redactarlo a mano desde `templates/north-star-template.md`.
+
+Resumen: docs tocados, ADR creado/movido, qué se archivó, north-star presente. OK para commit **solo** si el usuario lo autorizó.
 
 ## Límites
 

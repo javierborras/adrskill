@@ -4,23 +4,26 @@
 
 const readline = require("readline");
 const { install, normalizeLang } = require("../scripts/install.js");
+const { parseCreateAdrArgs, createAdr, CREATE_ADR_USAGE } = require("./create-adr.js");
+const { parseInferArgs, inferNorthstar, INFER_NORTHSTAR_USAGE } = require("./infer-northstar.js");
 
-const USAGE = `Usage: docskills init [--lang en|es] [--dir <path>]
+const USAGE = `Usage: docskills <command> [options]
 
-  --lang, --locale, -l   Instruction language (en or es)
-  --dir                  Target project (default: current directory)
+Commands:
+  init              Install kit into a project (--lang en|es, --dir)
+  create-adr        Create docs/adr/<status>/NNN-slug.md (alias: create-ADR)
+  infer-northstar   Infer docs/current/north-star.md (gate: --goal|--doc|--paths)
 
   node path/to/docskills/bin/cli.js init --lang es
-  node path/to/docskills/bin/cli.js init --lang en
-  npx --yes path/to/docskills init --lang es
+  node path/to/docskills/bin/cli.js create-adr --title "Auth Google" --slug auth-google
+  node path/to/docskills/bin/cli.js infer-northstar --goal "Product intent…" --dry-run
 
-If --lang is omitted and stdin is a TTY, you will be prompted.
-If --lang is omitted and stdin is not a TTY, language defaults to en.
+Uso: docskills <comando> [opciones]
 
-Uso: docskills init [--lang en|es] [--dir <ruta>]
-
-Si se omite --lang y hay TTY, se pregunta el idioma.
-Si se omite --lang sin TTY, el idioma por defecto es en.
+Comandos:
+  init              Instala el kit (--lang en|es, --dir)
+  create-adr        Crea docs/adr/<status>/NNN-slug.md (alias: create-ADR)
+  infer-northstar   Infiere docs/current/north-star.md (puerta: --goal|--doc|--paths)
 `;
 
 function isTTY() {
@@ -28,10 +31,13 @@ function isTTY() {
 }
 
 function parseArgs(argv) {
-  const out = { command: null, lang: null, dir: process.cwd(), help: false, unknown: [] };
+  const out = { command: null, lang: null, dir: process.cwd(), help: false, unknown: [], raw: argv };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
-    if (arg === "init") out.command = "init";
+    const lower = String(arg).toLowerCase();
+    if (lower === "init") out.command = "init";
+    else if (lower === "create-adr") out.command = "create-adr";
+    else if (lower === "infer-northstar") out.command = "infer-northstar";
     else if (arg === "--help" || arg === "-h") out.help = true;
     else if (arg === "--lang" || arg === "--locale" || arg === "-l") out.lang = argv[++i];
     else if (arg.startsWith("--lang=")) out.lang = arg.slice("--lang=".length);
@@ -75,10 +81,51 @@ async function resolveLang(parsed) {
   return "en";
 }
 
+function usageFor(command) {
+  if (command === "create-adr") return CREATE_ADR_USAGE;
+  if (command === "infer-northstar") return INFER_NORTHSTAR_USAGE;
+  return USAGE;
+}
+
 async function main(argv) {
+  const first = argv[0] ? String(argv[0]).toLowerCase() : "";
+  if (first === "create-adr") {
+    const parsed = parseCreateAdrArgs(argv);
+    if (parsed.help) {
+      process.stdout.write(CREATE_ADR_USAGE);
+      return 0;
+    }
+    createAdr({
+      title: parsed.title,
+      slug: parsed.slug,
+      status: parsed.status,
+      from: parsed.from,
+      dir: parsed.dir,
+    });
+    return 0;
+  }
+
+  if (first === "infer-northstar") {
+    const parsed = parseInferArgs(argv);
+    if (parsed.help) {
+      process.stdout.write(INFER_NORTHSTAR_USAGE);
+      return 0;
+    }
+    inferNorthstar({
+      goal: parsed.goal,
+      doc: parsed.doc,
+      paths: parsed.paths,
+      dryRun: parsed.dryRun,
+      write: parsed.write,
+      dir: parsed.dir,
+      lang: parsed.lang,
+    });
+    return 0;
+  }
+
   const parsed = parseArgs(argv);
   if (parsed.help || parsed.unknown.includes("help")) {
-    process.stdout.write(USAGE);
+    process.stdout.write(usageFor(parsed.command));
     return 0;
   }
   if (parsed.command !== "init") {

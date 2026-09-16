@@ -4,11 +4,13 @@ Orientativos. Nunca autorizan cambios en ADRs o Git sin confirmación del usuari
 
 ## Intake (ingesta)
 
-1. Ejecutar `inspect-adrs.js`.
-2. Separar evidencia observada de la propuesta técnica.
-3. Identificar dependencias y no-goals explícitos.
-4. Presentar alcance y pedir aprobación.
-5. Tras aprobación, crear `docs/adr/proposed/023-nuevo-feature.md` y actualizar `docs/adr/000-index.md`.
+1. (Opcional) `node <kit>/bin/cli.js create-adr --title "…" --slug …`
+2. Ejecutar `inspect-adrs.js`.
+3. Separar evidencia observada de la propuesta técnica.
+4. Identificar dependencias y no-goals explícitos.
+5. Presentar alcance y pedir aprobación.
+6. Tras aprobación, crear `docs/adr/proposed/023-nuevo-feature.md` y actualizar `docs/adr/000-index.md` (o usar `create-adr`).
+
 
 ## Ejecución de una fase
 

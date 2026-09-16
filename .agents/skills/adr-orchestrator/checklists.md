@@ -5,11 +5,12 @@ Copiar el bloque del modo activo y marcarlo en la sesión.
 ## Intake
 
 ```
+- [ ] (Opcional) create-adr --title … scaffold NNN-slug.md + índice
 - [ ] Evidencia / supuestos / decisiones / no-goals / preguntas, separados
 - [ ] inspect-adrs.js ejecutado; siguiente ID libre
 - [ ] Duplicados, traslapes y dependencias revisados
 - [ ] Aprobación explícita del usuario
-- [ ] Archivo NNN-slug.md creado (proposed/ o in-progress/)
+- [ ] Archivo NNN-slug.md creado (proposed/ o in-progress/); nunca done/; sin -pendings-
 - [ ] 000-index.md actualizado
 ```
 
@@ -54,6 +55,7 @@ Copiar el bloque del modo activo y marcarlo en la sesión.
 - [ ] Pruebas en verde
 - [ ] Pendientes clasificados (resuelto / diferido / rechazado / abierto+responsable)
 - [ ] doc-keeper invocado
+- [ ] docs/current/north-star.md existe (infer-northstar con puerta o a mano)
 - [ ] Movido a done/; Status Done/Implemented/Hecho
 - [ ] 000-index.md y docs/current/ actualizados
 - [ ] Planes sueltos en docs/archive/

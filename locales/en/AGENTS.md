@@ -36,7 +36,16 @@ File names: `NNN-slug.md` (three or more digits). One file per piece of work; no
 
 ## Skills in this kit
 
-- `adr-orchestrator` — intake, portfolio, phase execution, validation, handoff, and closeout.
-- `doc-keeper` — update SSoT, register ADRs, and archive stale plans **before** a commit or when closing a milestone.
+- `adr-orchestrator` — intake (step 0: `create-adr`), portfolio, phase execution, validation, handoff, and closeout.
+- `doc-keeper` — update SSoT, ensure `docs/current/north-star.md`, register ADRs, and archive stale plans **before** a commit or when closing a milestone.
+
+Kit CLI (from the clone or `npx`):
+
+```powershell
+node <kit>\bin\cli.js create-adr --title "Auth Google" --slug auth-google
+node <kit>\bin\cli.js infer-northstar --goal "…" --dry-run
+```
+
+`infer-northstar` requires a gate (`--goal` / `--doc` / `--paths`) before scanning; default dry-run; `--write` only with approval. Marks the draft as inferred.
 
 Invoke `doc-keeper` on every closeout and before `git commit`.

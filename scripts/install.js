@@ -33,9 +33,9 @@ const MESSAGES = {
     filesTitle: "Files",
     skillsTitle: "How to trigger skills",
     skillsHint:
-      'Say: "use adr-orchestrator", "intake this ADR", "inspect the portfolio", "run phase 2 of 019", "handoff", "close the ADR", "doc-keeper before commit".',
-    adrOrchestrator: "intake, portfolio, phase execution, validation, handoff, closeout",
-    docKeeper: "update SSoT, register ADRs, archive stale plans before commit",
+      'Say: "use adr-orchestrator", "create-adr", "infer-northstar", "intake this ADR", "inspect the portfolio", "run phase 2 of 019", "handoff", "close the ADR", "doc-keeper before commit".',
+    adrOrchestrator: "intake (create-adr step 0), portfolio, phase execution, validation, handoff, closeout",
+    docKeeper: "update SSoT, ensure north-star exists, register ADRs, archive stale plans before commit",
     installed: "docskills installed",
     cursor: "Cursor          .cursor/skills + .cursor/rules/docskills.mdc",
     claude: "Claude Code     .claude/skills + CLAUDE.md",
@@ -48,9 +48,9 @@ const MESSAGES = {
     filesTitle: "Archivos",
     skillsTitle: "Cómo disparar los skills",
     skillsHint:
-      'Frases: "usá adr-orchestrator", "ingestá este ADR", "inspeccioná el portafolio", "ejecutá la fase 2 del 019", "handoff", "cerrá el ADR", "doc-keeper antes del commit".',
-    adrOrchestrator: "ingesta, portafolio, ejecución por fases, validación, handoff, cierre",
-    docKeeper: "actualizar SSoT, registrar ADRs, archivar planes viejos antes del commit",
+      'Frases: "usá adr-orchestrator", "create-adr", "infer-northstar", "ingestá este ADR", "inspeccioná el portafolio", "ejecutá la fase 2 del 019", "handoff", "cerrá el ADR", "doc-keeper antes del commit".',
+    adrOrchestrator: "ingesta (create-adr paso 0), portafolio, ejecución por fases, validación, handoff, cierre",
+    docKeeper: "actualizar SSoT, asegurar north-star, registrar ADRs, archivar planes viejos antes del commit",
     installed: "docskills instalado",
     cursor: "Cursor          .cursor/skills + .cursor/rules/docskills.mdc",
     claude: "Claude Code     .claude/skills + CLAUDE.md",
@@ -275,9 +275,11 @@ function install(options) {
     writeIfMissing(path.join(target, "docs", "current", "north-star.md"), northStarLive),
   );
 
-  for (const name of ["adr-template.md", "adr-index-template.md"]) {
+  for (const name of ["adr-template.md", "adr-index-template.md", "north-star-template.md"]) {
     const dest = path.join(target, "templates", name);
-    copyFile(localePath(kitRoot, lang, "templates", name), dest);
+    const src = localePath(kitRoot, lang, "templates", name);
+    if (!fs.existsSync(src)) continue;
+    copyFile(src, dest);
     record(files, path.join("templates", name), "updated");
   }
 

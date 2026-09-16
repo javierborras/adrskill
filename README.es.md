@@ -80,7 +80,7 @@ Qué queda en el proyecto destino:
 | `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md` | Instrucciones del host en el idioma elegido |
 | `.cursor/rules/docskills.mdc` | Regla always-on de Cursor |
 | `.agents/rules/north-star-research-and-design.md` | North Star de corte limpio |
-| `templates/` | Plantillas de ADR e índice en el idioma elegido |
+| `templates/` | Plantillas de ADR, índice y north-star en el idioma elegido |
 | `docs/current`, `docs/adr/…`, `docs/archive` | Bootstrap si faltan |
 | `.claude-plugin/`, `.codex-plugin/`, `.github/plugin/` | Adaptadores para que otros hosts funcionen después |
 
@@ -88,10 +88,24 @@ Qué queda en el proyecto destino:
 
 | Skill | Cuándo |
 |-------|--------|
-| `adr-orchestrator` | Crear, numerar, inspeccionar, ejecutar fases, validar, handoff o cerrar un ADR. |
-| `doc-keeper` | Antes de `git commit`, al cerrar un hito, o al final de CLOSEOUT. |
+| `adr-orchestrator` | Crear, numerar, inspeccionar, ejecutar fases, validar, handoff o cerrar un ADR. Paso 0 de ingesta: `create-adr`. |
+| `doc-keeper` | Antes de `git commit`, al cerrar un hito, o al final de CLOSEOUT (verifica que exista north-star). |
 
-Frases útiles: “usá adr-orchestrator”, “ingestá este ADR”, “inspeccioná el portafolio”, “ejecutá la fase 2 del 019”, “handoff”, “cerrá el ADR”, “doc-keeper antes del commit”.
+Frases útiles: “usá adr-orchestrator”, “create-adr”, “infer-northstar”, “ingestá este ADR”, “inspeccioná el portafolio”, “ejecutá la fase 2 del 019”, “handoff”, “cerrá el ADR”, “doc-keeper antes del commit”.
+
+### CLI: create-adr e infer-northstar
+
+Desde el clone del kit (o con `npx`):
+
+```powershell
+node .\adrskill\bin\cli.js create-adr --title "Auth vía Google" --slug auth-google
+node .\adrskill\bin\cli.js create-ADR --title "Cache Redis" --status in-progress --from notes.md
+node .\adrskill\bin\cli.js infer-northstar --goal "Construimos X para Y. No-goal Z." --dry-run
+node .\adrskill\bin\cli.js infer-northstar --doc docs\current\scope.md --write
+```
+
+- `create-adr` (alias `create-ADR`): siguiente `NNN`, escribe `docs/adr/<status>/NNN-slug.md`, actualiza el índice. Default `proposed`. **Nunca** `done/`. Sin companions `-pendings-`.
+- `infer-northstar`: **puerta obligatoria** (`--goal` / `--doc` / `--paths`) antes de escanear. Default dry-run; solo escribe con `--write`. Marca el borrador como inferido. Heurísticas (no dump ciego): README*, `docs/current/`, `package.json`, `*.sln`, `Cargo.toml`, entrypoints.
 
 Scripts (solo lectura), desde la raíz del repo destino:
 
@@ -127,7 +141,7 @@ Nombres de ADR: `NNN-slug.md` (tres o más dígitos). Un archivo por trabajo; no
 
 ## Requisitos
 
-- Node.js 18+ para `init` y los scripts de ADR (CommonJS, sin dependencias extra).
+- Node.js 18+ para `init`, `create-adr`, `infer-northstar` y los scripts de ADR (CommonJS, sin dependencias extra).
 - Git según las reglas del repo destino. Este kit **no** hace commit ni push en el proyecto destino.
 
 ## Fuera de alcance
