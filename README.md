@@ -61,6 +61,17 @@ Si se omite `--lang` y hay TTY, el instalador pregunta. Sin TTY, el default es `
 
 Re-ejecutar es seguro: actualiza archivos del kit, no borra ADRs existentes y no pisa a ciegas un `AGENTS.md` de proyecto (agrega o refresca una sección delimitada).
 
+## Actualizar (ya instalado)
+
+Si `adrskill/` ya existe en el proyecto destino, **no** vuelvas a clonar (`gh repo clone` / `git clone` fallan si el destino existe). Desde la raíz del proyecto destino:
+
+```powershell
+git -C .\adrskill pull
+node .\adrskill\bin\cli.js init --lang es
+```
+
+Inglés: `init --lang en`.
+
 Qué queda en el proyecto destino:
 
 | Host | Qué usa |
@@ -171,6 +182,17 @@ gh repo clone javierborras/adrskill
 node .\adrskill\bin\cli.js init --lang en
 node .\adrskill\bin\cli.js init --lang es
 ```
+
+### Update (already installed)
+
+If `adrskill/` already exists, **do not** re-clone. From the target project root:
+
+```powershell
+git -C .\adrskill pull
+node .\adrskill\bin\cli.js init --lang en
+```
+
+Spanish: `init --lang es`.
 
 Canonical paths stay English (`docs/adr/…`). CLI helpers:
 
